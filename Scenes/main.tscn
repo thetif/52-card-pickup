@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx8chjodrid4c"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_7ru3y"]
+[ext_resource type="PackedScene" uid="uid://b1bn5nxx0m4uv" path="res://Scenes/deck.tscn" id="2_kye74"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_7ru3y")
+
+[node name="Deck" parent="." instance=ExtResource("2_kye74")]
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_top = 0.03
+anchor_right = 0.145
+anchor_bottom = 0.09
+offset_left = 31.0
+offset_right = -1.52588e-05
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="TimeLabel" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.825
+anchor_top = 0.046
+anchor_right = 0.915
+anchor_bottom = 0.1
+offset_left = -6.10352e-05
+offset_top = 0.199997
+theme_override_font_sizes/font_size = 24
+text = "Time: "
+
+[connection signal="collected_all" from="Deck" to="." method="_on_deck_collected_all"]
+[connection signal="update_score" from="Deck" to="." method="_on_deck_update_score"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

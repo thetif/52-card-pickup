@@ -9,6 +9,7 @@ var last_clicked = 1
 signal update_score
 signal collected_all
 
+
 func _ready() -> void:
 	for texture in card_textures:
 		var card = card_scene.instantiate()
@@ -18,6 +19,7 @@ func _ready() -> void:
 		card.rotation_degrees = randf_range(-180, 180)
 		add_child(card)
 		card.connect("picked_up", _on_card_picked_up)
+		card.connect("burned_up", _on_card_burned_up)
 	last_clicked = Time.get_ticks_msec()
 		
 func _on_card_picked_up():
@@ -36,3 +38,10 @@ func calculate_score() -> int:
 	var inversed : float = 1.0/elapsed_sec
 	var score : float = inversed * 100
 	return round(score)
+
+
+func _on_card_burned_up(body: Node2D) -> void:
+	update_score.emit(-10)
+	
+	if get_child_count() == 1:
+		collected_all.emit()

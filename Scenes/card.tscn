@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddhl1"]
 size = Vector2(57.5, 86)
 
-[node name="Card" type="Area2D"]
+[node name="Card" type="Area2D" groups=["Card"]]
 script = ExtResource("1_x5tfr")
 card_image = ExtResource("1_ovsl3")
 
@@ -14,8 +14,9 @@ card_image = ExtResource("1_ovsl3")
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_ovsl3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Card"]]
 position = Vector2(-2.25, 0)
 shape = SubResource("RectangleShape2D_ddhl1")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

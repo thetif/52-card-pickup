@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctr7cxxw3e21o"]
+
+[ext_resource type="Script" path="res://Scripts/lava.gd" id="1_x7bwd"]
+[ext_resource type="Texture2D" uid="uid://bbmt5fbj75hj" path="res://Assets/Mask.png" id="2_iyxgi"]
+[ext_resource type="Texture2D" uid="uid://b00csy2aafque" path="res://Assets/Lava.png" id="2_lnt2w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxuxf"]
+radius = 72.3395
+
+[node name="Lava" type="Area2D" groups=["Lava"]]
+script = ExtResource("1_x7bwd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Lava"]]
+position = Vector2(12, 20)
+shape = SubResource("CircleShape2D_yxuxf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+clip_children = 1
+position = Vector2(36, 21)
+scale = Vector2(0.222, 0.25)
+texture = ExtResource("2_iyxgi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2"]
+position = Vector2(-83.0678, 106.625)
+scale = Vector2(0.593262, 0.819719)
+texture = ExtResource("2_lnt2w")
+metadata/_edit_lock_ = true

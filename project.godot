@@ -13,8 +13,14 @@ config_version=5
 config/name="52 Card Pickup"
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://Icon.png"
 
 [display]
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
+
+[global_group]
+
+Lava="The lava spots"
+Card="Playing cards"

@@ -2,11 +2,15 @@ extends Node2D
 
 @onready var deck = $Deck
 @onready var game_timer : Timer = $GameTimer
+@onready var lava_timer : Timer = $LavaTimer
 @onready var hud : CanvasLayer = $HUD
 @onready var score_label : Label = $HUD/ScoreLabel
 @onready var time_label: Label = $HUD/TimeLabel
 @onready var end_screen : Control = $EndScreen 
 @onready var instructions : Control = $Instructions
+
+var lava_scene = preload("res://Scenes/lava.tscn")
+var window_size : Vector2 = Vector2(1200, 800)
 
 signal game_over
 
@@ -57,3 +61,10 @@ func _on_end_screen_restart_game() -> void:
 func _on_play_pressed() -> void:
 	instructions.visible = false
 	game_timer.start()
+	lava_timer.start()
+
+func _on_lava_timer_timeout() -> void:
+	var lava = lava_scene.instantiate()
+	lava.position.x = randf_range(50, window_size.x - 50)
+	lava.position.y = randf_range(100, window_size.y - 50)
+	add_child(lava)

@@ -25,7 +25,6 @@ func _on_card_picked_up():
 	last_clicked = Time.get_ticks_msec()
 	update_score.emit(score)
 	
-	print("children: ", get_child_count())
 	if get_child_count() == 1:
 		collected_all.emit()
 

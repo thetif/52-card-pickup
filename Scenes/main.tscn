@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx8chjodrid4c"]
+[gd_scene load_steps=4 format=3 uid="uid://dx8chjodrid4c"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_7ru3y"]
 [ext_resource type="PackedScene" uid="uid://b1bn5nxx0m4uv" path="res://Scenes/deck.tscn" id="2_kye74"]
+[ext_resource type="PackedScene" uid="uid://cq6ooo2f74ytj" path="res://Scenes/end_screen.tscn" id="3_k6hmk"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7ru3y")
@@ -36,6 +37,10 @@ offset_top = 0.199997
 theme_override_font_sizes/font_size = 24
 text = "Time: "
 
+[node name="EndScreen" parent="." instance=ExtResource("3_k6hmk")]
+
+[connection signal="game_over" from="." to="EndScreen" method="_on_main_game_over"]
 [connection signal="collected_all" from="Deck" to="." method="_on_deck_collected_all"]
 [connection signal="update_score" from="Deck" to="." method="_on_deck_update_score"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="restart_game" from="EndScreen" to="." method="_on_end_screen_restart_game"]

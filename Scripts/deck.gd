@@ -13,8 +13,8 @@ func _ready() -> void:
 	for texture in card_textures:
 		var card = card_scene.instantiate()
 		card.card_image = texture
-		card.position.x = randf_range(100, window_size.x - 50)
-		card.position.y = randf_range(50, window_size.y - 50)
+		card.position.x = randf_range(50, window_size.x - 50)
+		card.position.y = randf_range(100, window_size.y - 50)
 		card.rotation_degrees = randf_range(-180, 180)
 		add_child(card)
 		card.connect("picked_up", _on_card_picked_up)

@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq6ooo2f74ytj"]
+
+[ext_resource type="Script" path="res://Scripts/end_screen.gd" id="1_mb140"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_es65j"]
+font_size = 36
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mb140")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.207843, 0.207843, 0.682353)
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 440.0
+offset_right = 370.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 24
+text = "Retry"
+
+[node name="FinalScore" type="CanvasGroup" parent="."]
+
+[node name="Header" type="Label" parent="FinalScore"]
+offset_left = 91.0
+offset_top = 202.0
+offset_right = 519.0
+offset_bottom = 252.0
+theme_override_font_sizes/font_size = 36
+text = "Final Score"
+label_settings = SubResource("LabelSettings_es65j")
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="FinalScore"]
+offset_left = 82.0
+offset_top = 305.0
+offset_right = 549.0
+offset_bottom = 382.0
+theme_override_font_sizes/font_size = 56
+text = "Score..."
+horizontal_alignment = 1
+
+[node name="Leaderboard" type="CanvasGroup" parent="."]
+
+[node name="Header" type="Label" parent="Leaderboard"]
+offset_left = 679.0
+offset_top = 115.0
+offset_right = 1110.0
+offset_bottom = 165.0
+theme_override_font_sizes/font_size = 36
+text = "Leaderboard"
+horizontal_alignment = 1
+
+[node name="Board" type="Label" parent="Leaderboard"]
+offset_left = 695.0
+offset_top = 185.0
+offset_right = 1076.0
+offset_bottom = 621.0
+
+[node name="ChangePlayerNameText" type="TextEdit" parent="Leaderboard"]
+offset_left = 673.0
+offset_top = 691.0
+offset_right = 1062.0
+offset_bottom = 735.0
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Set your name..."
+
+[node name="SavePlayerNameButton" type="Button" parent="Leaderboard"]
+offset_left = 1079.0
+offset_top = 691.0
+offset_right = 1141.0
+offset_bottom = 733.0
+theme_override_font_sizes/font_size = 24
+text = "Save"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

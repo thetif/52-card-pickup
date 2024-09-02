@@ -1,14 +1,21 @@
 extends Node2D
 
+@onready var deck = $Deck
 @onready var game_timer : Timer = $GameTimer
+@onready var hud : CanvasLayer = $HUD
 @onready var score_label : Label = $HUD/ScoreLabel
 @onready var time_label: Label = $HUD/TimeLabel
+@onready var end_screen : Control = $EndScreen 
+
+signal game_over
 
 var score : int = 0
 
 func _ready() -> void:
 	game_timer.start() # 5 minute timer
 	update_score_label()
+	hud.visible = true
+	end_screen.visible = false
 	
 func _physics_process(delta: float) -> void:
 	update_time_label()
@@ -32,10 +39,17 @@ func _on_deck_update_score(points:int) -> void:
 
 func _on_deck_collected_all() -> void:
 	score += game_timer.time_left
-	update_score_label()
-	print("final score: ", score)
 	game_timer.stop()
-	get_tree().quit()
+	end_game(true)
 	
 func _on_game_timer_timeout() -> void:
-	print("timeout score: ", score)
+	end_game(false)
+	
+func end_game(win : bool) -> void:
+	game_over.emit(win, score)
+	deck.queue_free()
+	hud.visible = false
+	end_screen.visible = true
+
+func _on_end_screen_restart_game() -> void:
+	get_tree().reload_current_scene()

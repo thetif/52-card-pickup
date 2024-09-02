@@ -12,9 +12,9 @@ script = ExtResource("1_7ru3y")
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 60.0
 one_shot = true
-autostart = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
 anchors_preset = -1
@@ -38,9 +38,54 @@ theme_override_font_sizes/font_size = 24
 text = "Time: "
 
 [node name="EndScreen" parent="." instance=ExtResource("3_k6hmk")]
+visible = false
+
+[node name="Instructions" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1221.0
+offset_bottom = 800.0
+
+[node name="ColorRect" type="ColorRect" parent="Instructions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.207843, 0.207843, 0.682353)
+
+[node name="Tutorial" type="Label" parent="Instructions"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 133.0
+offset_right = 1059.0
+offset_bottom = 533.0
+theme_override_font_sizes/font_size = 36
+text = "Pick up all of the cards before the time runs out or they are destroyed."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Play" type="Button" parent="Instructions"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -99.5
+offset_top = -201.0
+offset_right = 99.5
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Play"
 
 [connection signal="game_over" from="." to="EndScreen" method="_on_main_game_over"]
 [connection signal="collected_all" from="Deck" to="." method="_on_deck_collected_all"]
 [connection signal="update_score" from="Deck" to="." method="_on_deck_update_score"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="restart_game" from="EndScreen" to="." method="_on_end_screen_restart_game"]
+[connection signal="pressed" from="Instructions/Play" to="." method="_on_play_pressed"]

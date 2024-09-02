@@ -6,13 +6,13 @@ extends Node2D
 @onready var score_label : Label = $HUD/ScoreLabel
 @onready var time_label: Label = $HUD/TimeLabel
 @onready var end_screen : Control = $EndScreen 
+@onready var instructions : Control = $Instructions
 
 signal game_over
 
 var score : int = 0
 
 func _ready() -> void:
-	game_timer.start() # 5 minute timer
 	update_score_label()
 	hud.visible = true
 	end_screen.visible = false
@@ -53,3 +53,7 @@ func end_game(win : bool) -> void:
 
 func _on_end_screen_restart_game() -> void:
 	get_tree().reload_current_scene()
+
+func _on_play_pressed() -> void:
+	instructions.visible = false
+	game_timer.start()
